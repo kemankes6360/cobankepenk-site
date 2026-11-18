@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çoban Kepenk | Çoban Grup Otomasyon &amp; Kapı Teknolojileri | Otomatik Kepenk Arıza, Bakım, Yedek Parça &amp; Sıfır Kapı Satışı</title>
+  <meta name="description" content="Çoban Kepenk (Çoban Grup Otomasyon & Kapı Teknolojileri): Sancaktepe İstanbul merkezimizden tüm İstanbul'a otomatik kepenk arıza tamiri, periyodik bakım ve sıfır otomatik kapı satışı. 81 ile motor, kumanda, alıcı kart ve yedek parça kargo gönderimi. Hemen arayın: 0536 749 58 70">
+  <link rel="canonical" href="https://cobankepenk.com.tr/">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary': '#0F141C',
+            'brand-accent': '#2563EB',
+            'brand-accent-light': '#60A5FA',
+            'brand-steel': '#94A3B8',
+            'brand-bg': '#F4F6F9',
+            'brand-text': '#1E293B',
+            'brand-surface': '#FFFFFF',
+            'brand-obsidian': '#161F2C',
+            'brand-charcoal': '#1E293B',
+          },
+          fontFamily: {
+            'heading': ['Inter', 'sans-serif'],
+            'drama': ['Playfair Display', 'serif'],
+            'mono': ['JetBrains Mono', 'monospace'],
+            'body': ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'card': '2rem',
+            'pill': '3rem',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --brand-primary: #0F141C;
+      --brand-accent: #2563EB;
+      --brand-bg: #F4F6F9;
+      --brand-text: #1E293B;
+      --brand-surface: #FFFFFF;
+      --bg-rgb: 15, 20, 28;
+      --border-rgb: 148, 163, 184;
+    }
+
+    body {
+      background-color: #F4F6F9;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Global Noise Overlay */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+    }
+    .noise-overlay svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Island Navbar States */
+    .navbar-transparent {
+      background: rgba(15, 20, 28, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .navbar-scrolled {
+      background: rgba(15, 20, 28, 0.94);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Platinum / Ice Blue Metallic Text Gradient (No Yellow!) */
+    .steel-gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 0%, #93C5FD 55%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .steel-border-glow {
+      box-shadow: 0 10px 35px rgba(37, 99, 235, 0.16);
+    }
+
+    /* Micro-interactions */
+    .magnetic-btn {
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s ease;
+    }
+    @media (hover: hover) {
+      .magnetic-btn:hover {
+        transform: scale(1.03);
+      }
+      .nav-link-hover:hover {
+        transform: translateY(-1px);
+        color: #60A5FA;
+      }
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      background: var(--brand-surface);
+      border: 1px solid rgba(15, 20, 28, 0.08);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(15, 20, 28, 0.04);
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    @media (hover: hover) {
+      .feature-card:hover {
+        border-color: rgba(37, 99, 235, 0.45);
+        transform: translateY(-4px);
+      }
+    }
+
+    /* WhatsApp Pulse */
+    #whatsapp-float {
+      animation: wp-pulse 2.2s infinite;
+    }
+    @keyframes wp-pulse {
+      0%, 100% { box-shadow: 0 4px 18px rgba(37, 211, 102, 0.35); }
+      50% { box-shadow: 0 4px 32px rgba(37, 211, 102, 0.7); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F141C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2563EB;
+      border-radius: 99px;
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-accent selection:text-white">
+
+  <!-- Noise Overlay -->
+  <div class="noise-overlay">
+    <svg width="100%" height="100%">
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#noise)" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Top Announcement Strip -->
+  <div class="bg-brand-primary text-slate-200 border-b border-white/10 text-xs py-2.5 px-4 relative z-40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span><strong class="text-white">MERKEZ:</strong> Merve Mah. Ege Sk. Sancaktepe / İstanbul</span>
+        <span class="hidden md:inline text-white/30">|</span>
+        <span class="hidden md:inline text-slate-300"><strong>SERVİS &amp; MONTAJ:</strong> İstanbul Tüm İlçeler &amp; Gebze-Kocaeli Hattı</span>
+      </div>
+      <div class="flex items-center gap-3 font-mono">
+        <span class="bg-brand-accent/20 border border-brand-accent-light/40 text-brand-accent-light px-2.5 py-0.5 rounded-full text-[11px] font-semibold">
+          📦 81 İle Yedek Parça &amp; Motor Kargo
+        </span>
+        <a href="tel:+905367495870" class="text-white hover:text-brand-accent-light font-bold flex items-center gap-1 transition-colors">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5 text-brand-accent-light"></i>
+          0536 749 58 70
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Island Navbar -->
+  <nav id="navbar" class="fixed top-12 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl rounded-pill navbar-transparent transition-all duration-500">
+    <div class="flex items-center justify-between px-4 md:px-7 py-3">
+      <!-- Brand Logo & Name -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full overflow-hidden border border-white/25 shadow-md bg-brand-primary flex-shrink-0">
+          <img src="logo.jpg" alt="Çoban Kepenk - Çoban Grup Otomasyon & Kapı Teknolojileri Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'flex w-full h-full items-center justify-center font-drama font-bold text-white text-lg\'>ÇG</span>'">
+        </div>
+        <div>
+          <span class="block font-heading font-extrabold text-base md:text-lg tracking-tight text-white leading-none">
+            ÇOBAN <span class="text-brand-accent-light">KEPENK</span>
+          </span>
+          <span class="block font-mono text-[10px] uppercase tracking-widest text-slate-300 mt-1">
+            Çoban Grup Otomasyon &amp; Kapı
+          </span>
+        </div>
+      </a>
+
+      <!-- Nav Links -->
+      <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-200">
+        <a href="#sifir-kapi" class="nav-link-hover transition-all">Sıfır Kapı Satışı</a>
+        <a href="#ariza-bakim" class="nav-link-hover transition-all">Arıza &amp; Bakım</a>
+        <a href="#katalog" class="nav-link-hover transition-all">Yedek Parça (24 Ürün)</a>
+        <a href="#bolgeler" class="nav-link-hover transition-all">Servis Bölgeleri</a>
+        <a href="#iletisim" class="nav-link-hover transition-all">İletişim</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="sepetAcKapat(true)" class="relative overflow-hidden bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-2.5 rounded-pill font-heading font-semibold text-xs md:text-sm flex items-center gap-2 magnetic-btn">
+          <i data-lucide="shopping-bag" class="w-4 h-4 text-brand-accent-light"></i>
+          <span class="hidden sm:inline">Teklif Sepeti</span>
+          <span id="sepet-sayac" class="bg-brand-accent text-white font-mono font-bold text-xs px-2 py-0.5 rounded-full">0</span>
+        </button>
+
+        <a href="tel:+905367495870" onclick="donusumKaydet('ust_menu_arama')" class="relative overflow-hidden bg-brand-accent hover:bg-blue-500 text-white px-4 md:px-5 py-2.5 rounded-pill font-heading font-bold text-xs md:text-sm flex items-center gap-2 magnetic-btn shadow-lg shadow-brand-accent/30">
+          <i data-lucide="phone" class="w-4 h-4"></i>
+          <span>0536 749 58 70</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION - "The Opening Shot" -->
+  <section id="hero" class="relative min-h-[94dvh] bg-brand-primary text-white flex items-center pt-28 pb-16 px-4 md:px-8 overflow-hidden">
+    <!-- Architectural Industrial Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&q=80" alt="Çoban Kepenk Otomasyon ve Endüstriyel Kapı Sistemleri" class="w-full h-full object-cover opacity-20 scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/85 to-brand-primary/65"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(37,99,235,0.22),transparent_55%)]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-12 gap-10 items-center">
+      <!-- Left Column: Hero Drama Typography & CTA -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="hero-badge inline-flex items-center gap-2.5 bg-white/5 border border-white/15 rounded-pill px-4 py-1.5 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-brand-accent-light animate-ping"></span>
+          <span class="font-mono text-xs uppercase tracking-widest text-slate-200">
+            TS EN 13241 Standartlarında Üretim · 81 İle Kargo
+          </span>
+        </div>
+
+        <div class="space-y-2">
+          <h1 class="hero-line-1 font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-[1.1]">
+            Çelik Güvence,
+          </h1>
+          <div class="hero-line-2 font-drama italic text-5xl sm:text-7xl lg:text-[5.25rem] leading-[1.05] steel-gradient-text pb-2">
+            Kusursuz Otomasyon.
+          </div>
+        </div>
+
+        <p class="hero-subtitle font-body text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+          <strong class="text-white">Çoban Kepenk (Çoban Grup Otomasyon &amp; Kapı Teknolojileri)</strong> olarak Sancaktepe merkezimizden tüm İstanbul'a <strong class="text-white">otomatik kepenk arıza tamiri, periyodik bakım ve sıfır kapı montajı</strong> sunuyor; motor, kumanda, alıcı kart ve yedek parçaları <strong class="text-brand-accent-light">81 ile aynı gün kargoyla</strong> ulaştırıyoruz.
+        </p>
+
+        <!-- Primary CTAs -->
+        <div class="hero-cta flex flex-wrap items-center gap-3.5 pt-2">
+          <a href="tel:+905367495870" onclick="donusumKaydet('hero_telefon')" class="bg-brand-accent hover:bg-blue-500 text-white px-7 py-4 rounded-pill font-heading font-extrabold text-base flex items-center gap-3 magnetic-btn shadow-xl shadow-brand-accent/30">
+            <i data-lucide="phone-forwarded" class="w-5 h-5"></i>
+            Hemen Ara: 0536 749 58 70
+          </a>
+
+          <a href="https://wa.me/905367495870?text=Merhaba%20%C3%87oban%20Kepenk%2C%20web%20sitenizden%20ula%C5%9F%C4%B1yorum.%20Ar%C4%B1za%20servisi%20%2F%20s%C4%B1f%C4%B1r%20kap%C4%B1%20%2F%20yedek%20par%C3%A7a%20fiyat%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" onclick="donusumKaydet('hero_whatsapp')" class="bg-[#10B981] hover:bg-[#059669] text-white px-7 py-4 rounded-pill font-heading font-extrabold text-base flex items-center gap-2.5 magnetic-btn shadow-xl shadow-emerald-500/20">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            WhatsApp Hızlı Destek
+          </a>
+
+          <a href="#katalog" class="bg-white/10 hover:bg-white/15 border border-white/20 text-white px-6 py-4 rounded-pill font-heading font-semibold text-sm flex items-center gap-2 magnetic-btn">
+            <i data-lucide="package-search" class="w-4 h-4 text-brand-accent-light"></i>
+            Yedek Parça &amp; Motor Kataloğu
+          </a>
+        </div>
+
+        <!-- Policy Notice Box (No Free Inspection Rule) -->
+        <div class="hero-cta bg-brand-obsidian/90 border-l-4 border-brand-accent rounded-2xl p-4 text-xs sm:text-sm text-slate-200 flex items-start gap-3 max-w-2xl">
+          <i data-lucide="shield-check" class="w-5 h-5 text-brand-accent-light flex-shrink-0 mt-0.5"></i>
+          <div>
+            <strong class="text-white">Servis, Keşif ve Fiyat Politikamız:</strong>
+            Firmamızda ücretsiz keşif veya ücretsiz servis uygulaması bulunmamaktadır. Arıza tespiti, bakım, sıfır kapı imalatı ve güncel yedek parça fiyatları için doğrudan <a href="tel:+905367495870" class="text-brand-accent-light underline font-semibold">0536 749 58 70</a> hattımızdan ustamızla görüşebilirsiniz.
+          </div>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="hero-stats grid grid-cols-3 gap-6 pt-4 border-t border-white/10 max-w-xl">
+          <div>
+            <span class="font-mono text-2xl sm:text-3xl font-bold text-white">24+</span>
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-slate-400 mt-1">Motor &amp; Parça Çeşidi</span>
+          </div>
+          <div>
+            <span class="font-mono text-2xl sm:text-3xl font-bold text-brand-accent-light">81 İl</span>
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-slate-400 mt-1">Aynı Gün Kargo</span>
+          </div>
+          <div>
+            <span class="font-mono text-2xl sm:text-3xl font-bold text-white">7/24</span>
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-slate-400 mt-1">Acil Kepenk Servisi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Brand Crest + Instant Fault / New Door Dispatch Widget -->
+      <div class="lg:col-span-5">
+        <div class="bg-brand-obsidian/95 border border-white/15 rounded-card p-6 sm:p-8 steel-border-glow backdrop-blur-xl">
+          <div class="flex items-center gap-4 pb-5 mb-5 border-b border-white/10">
+            <img src="logo.jpg" alt="Çoban Grup Logo" class="w-16 h-16 rounded-full border border-white/25 object-cover flex-shrink-0" onerror="this.style.display='none'">
+            <div>
+              <span class="font-mono text-[11px] uppercase tracking-widest text-brand-accent-light block">Hızlı Talep Masası</span>
+              <h2 class="font-heading font-bold text-xl text-white">Acil Arıza &amp; Sıfır Kapı Formu</h2>
+              <p class="text-xs text-slate-300 mt-0.5">Seçiminizi yapın, doğrudan WhatsApp usta hattımıza düşsün.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label class="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1.5">İhtiyacınız Olan Hizmet</label>
+              <select id="hizli-hizmet" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors">
+                <option value="Acil Kepenk Arıza & Tamir Servisi">🚨 Acil Kepenk Arıza &amp; Tamir Servisi</option>
+                <option value="Sıfır Otomatik Kepenk İmalat & Montaj">🚪 Sıfır Otomatik Kepenk İmalat &amp; Montaj</option>
+                <option value="Fotoselli Otomatik Cam Kapı Sistemi">🏢 Fotoselli Otomatik Cam Kapı Sistemi</option>
+                <option value="Seksiyonel Garaj / Sanayi Kapısı">🏠 Seksiyonel Garaj / Sanayi Kapısı</option>
+                <option value="Periyodik Kepenk & Kapı Bakımı">🔧 Periyodik Kepenk &amp; Kapı Bakımı</option>
+                <option value="Motor / Kumanda / Yedek Parça Siparişi (81 İle Kargo)">📦 Motor / Kumanda / Yedek Parça (81 İle Kargo)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1">Adınız / Firma Adı</label>
+                <input id="hizli-ad" type="text" placeholder="Örn: Mehmet Kaya" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1">İl / İlçe</label>
+                <input id="hizli-ilce" type="text" placeholder="Örn: Sancaktepe / İstanbul" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-mono text-[11px] uppercase tracking-wider text-slate-300 mb-1">Arıza Detayı veya Kapı Ölçüsü (Opsiyonel)</label>
+              <input id="hizli-not" type="text" placeholder="Örn: Kepenk yarıda kaldı / 350x300 cm sıfır kepenk" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+            </div>
+
+            <button onclick="hizliTalepGonder()" class="w-full bg-brand-accent hover:bg-blue-500 text-white font-heading font-extrabold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 magnetic-btn shadow-lg shadow-brand-accent/25 mt-2">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              WhatsApp'tan Ustaya Gönder &amp; Fiyat Al
+            </button>
+
+            <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-2">
+              <span>📍 Sancaktepe Merkez</span>
+              <span>⚡ Doğrudan Usta Muhatap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF & TRUST BAR -->
+  <section class="py-10 bg-brand-obsidian text-white border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="font-heading font-extrabold text-3xl md:text-4xl text-brand-accent-light">
+          <span data-count="1500">0</span>+
+        </div>
+        <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mt-1.5">Tamamlanan Kepenk &amp; Kapı</p>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-3xl md:text-4xl text-white">
+          <span data-count="24">0</span> Çeşit
+        </div>
+        <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mt-1.5">Stoktan Motor &amp; Yedek Parça</p>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-3xl md:text-4xl text-brand-accent-light">
+          <span data-count="81">0</span> İl
+        </div>
+        <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mt-1.5">Türkiye Geneli Kargo Sevkiyatı</p>
+      </div>
+      <div>
+        <div class="font-heading font-extrabold text-3xl md:text-4xl text-white">
+          TS EN <span data-count="13241">0</span>
+        </div>
+        <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mt-1.5">Avrupa Güvenlik Standardı</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FUNCTIONAL ARTIFACTS (3 Value Propositions) -->
+  <section id="ariza-bakim" class="py-24 px-4 md:px-6 bg-brand-bg">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-brand-accent font-semibold block mb-2">
+            ÇOBAN GRUP MÜHENDİSLİK STANDARTLARI
+          </span>
+          <h2 class="font-heading font-extrabold text-3xl md:text-5xl text-brand-primary tracking-tight">
+            Arıza, Bakım ve <span class="font-drama italic font-normal text-brand-accent">Canlı Operasyon.</span>
+          </h2>
+        </div>
+        <p class="font-body text-brand-text/75 max-w-md text-sm md:text-base">
+          Sıradan tamir yerine milimetrik arıza teşhisi, orijinal yedek parça tedariği ve uzun ömürlü sıfır kapı kurulumu sağlıyoruz.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-7">
+        <!-- Card 1: Diagnostic Shuffler -->
+        <div class="feature-card relative min-h-[340px] flex flex-col justify-end">
+          <div class="absolute inset-x-6 top-6 h-36 relative perspective-[1000px]">
+            <div class="shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-30 translate-y-0 scale-100 opacity-100 transition-all duration-500">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-brand-accent"></div>
+                  <span class="font-mono text-xs uppercase tracking-widest text-brand-text/70">01 · MOTOR &amp; TORK TESTİ</span>
+                </div>
+                <span class="font-mono text-[11px] bg-brand-accent/15 text-brand-accent px-2 py-0.5 rounded font-semibold">AKTİF</span>
+              </div>
+              <p class="font-heading font-semibold text-sm text-brand-primary">60 Nm – 300 Nm Tüp ve Santral Motor Limit Switch Kalibrasyonu</p>
+            </div>
+
+            <div class="shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-20 translate-y-3 scale-[0.95] opacity-60 transition-all duration-500">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-brand-text/30"></div>
+                  <span class="font-mono text-xs uppercase tracking-widest text-brand-text/70">02 · MEKANİK YAY &amp; LAMEL</span>
+                </div>
+                <span class="font-mono text-[11px] bg-brand-primary/10 text-brand-primary px-2 py-0.5 rounded">KONTROL</span>
+              </div>
+              <p class="font-heading font-semibold text-sm text-brand-primary">Temperli Yay Çeliği, Yan Dikme Fitili ve Lamel Hasar Onarımı</p>
+            </div>
+
+            <div class="shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-10 translate-y-6 scale-[0.9] opacity-30 transition-all duration-500">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-brand-text/30"></div>
+                  <span class="font-mono text-xs uppercase tracking-widest text-brand-text/70">03 · ELEKTRONİK &amp; UPS</span>
+                </div>
+                <span class="font-mono text-[11px] bg-brand-primary/10 text-brand-primary px-2 py-0.5 rounded">HAZIR</span>
+              </div>
+              <p class="font-heading font-semibold text-sm text-brand-primary">Alıcı Kart, Emniyet Fotoseli ve Kesintisiz UPS Güç Kaynağı Bakımı</p>
+            </div>
+          </div>
+
+          <div class="pt-44">
+            <h3 class="font-heading font-bold text-xl text-brand-primary mb-2">Garantili Arıza &amp; Bakım Servisi</h3>
+            <p class="font-body text-sm text-brand-text/70">
+              Sıkışan, yarıda kalan, kumandası çalışmayan veya yay kıran kepenk ve fotoselli kapılara Sancaktepe merkezimizden uzman müdahale.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Telemetry Typewriter -->
+        <div class="feature-card min-h-[340px] flex flex-col">
+          <div class="bg-brand-primary text-brand-surface rounded-2xl p-5 mb-6 flex-1 border border-brand-accent/30 shadow-inner relative overflow-hidden">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+              <span class="font-mono text-[11px] text-brand-accent-light uppercase tracking-widest">ÇOBAN-TELEMETRİ v2.6</span>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-mono text-[0.65rem] uppercase tracking-widest text-white/70">CANLI AKIŞ</span>
+              </div>
+            </div>
+
+            <div class="font-mono text-xs sm:text-sm leading-relaxed text-white/90 min-h-[90px]">
+              <span class="text-brand-accent-light font-bold">&gt; </span>
+              <span id="typewriter-text"></span><span class="animate-pulse bg-brand-accent-light w-2 h-4 inline-block align-middle ml-1"></span>
+            </div>
+          </div>
+
+          <h3 class="font-heading font-bold text-xl text-brand-primary mb-2">81 İle Aynı Gün Yedek Parça Kargo</h3>
+          <p class="font-body text-sm text-brand-text/70">
+            Kepenk motoru, alıcı kart, kumanda, fotosel göz ve UPS güç kaynaklarını Türkiye'nin 81 iline stoktan korumalı paketle gönderiyoruz.
+          </p>
+        </div>
+
+        <!-- Card 3: Status Grid -->
+        <div class="feature-card min-h-[340px] flex flex-col">
+          <div class="bg-brand-bg border border-brand-primary/10 rounded-2xl p-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-[11px] uppercase tracking-wider text-brand-primary font-semibold">HAFTALIK SERVİS &amp; SEVKİYAT PLANI</span>
+              <span class="font-mono text-[11px] text-brand-accent font-bold">AKTİF</span>
+            </div>
+            <div class="grid grid-cols-7 gap-1.5">
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Pzt</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Sal</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Çar</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Per</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Cum</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Cmt</div>
+              <div class="text-center font-mono text-[0.62rem] uppercase text-brand-text/50 mb-1">Paz</div>
+
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell"></div>
+
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+              <div class="h-8 rounded-md bg-brand-primary/10 grid-cell highlight"></div>
+            </div>
+          </div>
+
+          <h3 class="font-heading font-bold text-xl text-brand-primary mt-auto mb-2">Sıfır Kapı İmalatı &amp; Anahtar Teslim Kurulum</h3>
+          <p class="font-body text-sm text-brand-text/70">
+            Mağaza, fabrika, depo, otopark ve villalar için ölçüye özel sıfır otomatik kepenk, seksiyonel kapı ve fotoselli kapı üretimi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIFIR KAPI SATIŞI & ÖLÇÜYE GÖRE TEKLİF MODÜLÜ -->
+  <section id="sifir-kapi" class="py-24 px-4 md:px-6 bg-brand-primary text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-light block mb-2">
+            ANAHTAR TESLİM İMALAT &amp; KURULUM
+          </span>
+          <h2 class="font-heading font-extrabold text-3xl md:text-5xl tracking-tight">
+            Sıfır Otomatik Kapı &amp; <span class="font-drama italic font-normal steel-gradient-text">Kepenk Sistemleri.</span>
+          </h2>
+        </div>
+        <p class="text-slate-300 max-w-xl text-sm md:text-base">
+          İster yeni açacağınız mağazanız için sıfır çelik/alüminyum kepenk, ister fabrika ve siteniz için seksiyonel kapı, fotoselli cam kapı veya bariyer sistemi. Ölçünüzü girin, hemen fiyatlandıralım.
+        </p>
+      </div>
+
+      <!-- Interactive Zero-Door Configurator Bar -->
+      <div class="bg-brand-obsidian border border-white/15 rounded-card p-6 md:p-8 mb-12 steel-border-glow">
+        <div class="flex items-center gap-2.5 mb-5">
+          <i data-lucide="ruler" class="w-5 h-5 text-brand-accent-light"></i>
+          <h3 class="font-heading font-bold text-lg text-white">Sıfır Kapı &amp; Kepenk Hızlı Ölçü / Fiyat Hesaplama Talebi</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="lg:col-span-2">
+            <label class="block font-mono text-[11px] uppercase text-slate-300 mb-1">Kapı / Kepenk Türü Seçin</label>
+            <select id="kapi-turu" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-4 py-3 text-sm text-white outline-none">
+              <option value="Sıfır Galvaniz Çelik Otomatik Kepenk">Çelik Otomatik Kepenk (Mağaza / Depo)</option>
+              <option value="Sıfır Poliüretan Dolgulu Alüminyum Kepenk">Poliüretanlı Alüminyum Kepenk (Sessiz &amp; Yalıtımlı)</option>
+              <option value="Sıfır Radarlı Fotoselli Otomatik Cam Kapı">Fotoselli Otomatik Cam Kapı (Market / İşyeri)</option>
+              <option value="Sıfır Seksiyonel Garaj & Fabrika Kapısı">Seksiyonel Garaj &amp; Sanayi Kapısı</option>
+              <option value="Sıfır Yana Kayar Bahçe Kapısı Sistemi">Yana Kayar Otomatik Bahçe Kapısı</option>
+              <option value="Sıfır Kollu Otopark Bariyer Sistemi">Otopark Kollu Bariyer Sistemi (3m - 6m)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] uppercase text-slate-300 mb-1">Yaklaşık Genişlik (En cm)</label>
+            <input id="kapi-en" type="number" placeholder="Örn: 350 cm" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-4 py-3 text-sm text-white outline-none">
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] uppercase text-slate-300 mb-1">Yaklaşık Yükseklik (Boy cm)</label>
+            <input id="kapi-boy" type="number" placeholder="Örn: 300 cm" class="w-full bg-brand-primary border border-white/15 focus:border-brand-accent-light rounded-xl px-4 py-3 text-sm text-white outline-none">
+          </div>
+          <div class="flex items-end">
+            <button onclick="sifirKapiTeklifAl()" class="w-full bg-brand-accent hover:bg-blue-500 text-white font-heading font-extrabold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 magnetic-btn">
+              <i data-lucide="calculator" class="w-4 h-4"></i>
+              WhatsApp'tan Fiyat İste
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Main New Door Systems Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-brand-obsidian border border-white/10 hover:border-brand-accent-light/50 rounded-card p-6 flex flex-col justify-between transition-all">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent-light/30 flex items-center justify-center text-brand-accent-light mb-5">
+              <i data-lucide="shield" class="w-6 h-6"></i>
+            </div>
+            <span class="font-mono text-[11px] uppercase tracking-widest text-brand-accent-light">SIFIR İMALAT &amp; MONTAJ</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 mb-2">Otomatik Çelik &amp; Alüminyum Kepenk</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Dükkan, mağaza, kuyumcu ve depolar için 0.80mm–1.20mm galvaniz çelik veya poliüretan dolgulu alüminyum lamelli, RAL fırın boyalı sıfır kepenk.
+            </p>
+          </div>
+          <button onclick="sepeteEkle('KAPI-KEPENK')" class="w-full bg-white/10 hover:bg-brand-accent text-white font-heading font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Teklif Sepetine Ekle
+          </button>
+        </div>
+
+        <div class="bg-brand-obsidian border border-white/10 hover:border-brand-accent-light/50 rounded-card p-6 flex flex-col justify-between transition-all">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent-light/30 flex items-center justify-center text-brand-accent-light mb-5">
+              <i data-lucide="maximize-2" class="w-6 h-6"></i>
+            </div>
+            <span class="font-mono text-[11px] uppercase tracking-widest text-brand-accent-light">MARKET · MAĞAZA · PLAZA</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 mb-2">Fotoselli Otomatik Cam Kapı</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Mikrodalga radarlı, emniyet fotoselli, dijital konum anahtarlı ve temperli/lamine camlı tek veya çift kanat yana kayar fotoselli kapı sistemleri.
+            </p>
+          </div>
+          <button onclick="sepeteEkle('KAPI-FOTOSEL')" class="w-full bg-white/10 hover:bg-brand-accent text-white font-heading font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Teklif Sepetine Ekle
+          </button>
+        </div>
+
+        <div class="bg-brand-obsidian border border-white/10 hover:border-brand-accent-light/50 rounded-card p-6 flex flex-col justify-between transition-all">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent-light/30 flex items-center justify-center text-brand-accent-light mb-5">
+              <i data-lucide="warehouse" class="w-6 h-6"></i>
+            </div>
+            <span class="font-mono text-[11px] uppercase tracking-widest text-brand-accent-light">KONUT · VİLLA · FABRİKA</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 mb-2">Seksiyonel Garaj &amp; Sanayi Kapısı</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              40mm poliüretan sandviç panelli, parmak sıkışma emniyetli, tavana doğru sessizce kayan motorlu seksiyonel garaj ve endüstriyel fabrika kapıları.
+            </p>
+          </div>
+          <button onclick="sepeteEkle('KAPI-SEKSIYONEL')" class="w-full bg-white/10 hover:bg-brand-accent text-white font-heading font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Teklif Sepetine Ekle
+          </button>
+        </div>
+
+        <div class="bg-brand-obsidian border border-white/10 hover:border-brand-accent-light/50 rounded-card p-6 flex flex-col justify-between transition-all">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent-light/30 flex items-center justify-center text-brand-accent-light mb-5">
+              <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <span class="font-mono text-[11px] uppercase tracking-widest text-brand-accent-light">SİTE · OTOPARK · TESİS</span>
+            <h3 class="font-heading font-bold text-xl text-white mt-1 mb-2">Bahçe Kapısı &amp; Kollu Bariyer</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Site ve fabrika girişleri için kremayer dişlili yana kayar bahçe kapısı otomasyonu ve 3–6 metre reflektörlü kollu otopark bariyer kurulumu.
+            </p>
+          </div>
+          <button onclick="sepeteEkle('KAPI-BARIYER')" class="w-full bg-white/10 hover:bg-brand-accent text-white font-heading font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> Teklif Sepetine Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24 ÜRÜNLÜK YEDEK PARÇA, MOTOR VE SIFIR KAPI KATALOĞU -->
+  <section id="katalog" class="py-24 px-4 md:px-6 bg-brand-bg">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-brand-accent font-bold block mb-2">
+            81 İLE KARGO · STOKTAN TESLİM · WHATSAPP FİYAT TEKLİFİ
+          </span>
+          <h2 class="font-heading font-extrabold text-3xl md:text-5xl text-brand-primary tracking-tight">
+            Yedek Parça, Motor &amp; <span class="font-drama italic font-normal text-brand-accent">Kapı Kataloğu.</span>
+          </h2>
+          <p class="text-brand-text/70 text-sm md:text-base mt-2 max-w-2xl">
+            Tüm ürünlerimizin teknik değerleri kartların üzerinde yer almaktadır. Sitede sabit fiyat yazılmaz; ürünleri sepete ekleyip tek tuşla <strong>WhatsApp (0536 749 58 70)</strong> hattımızdan güncel fiyat alabilirsiniz.
+          </p>
+        </div>
+
+        <button onclick="sepetAcKapat(true)" class="bg-brand-primary hover:bg-brand-obsidian text-white border border-white/15 px-6 py-4 rounded-pill font-heading font-bold text-sm flex items-center gap-3 magnetic-btn self-start lg:self-end shadow-lg">
+          <i data-lucide="shopping-cart" class="w-4 h-4 text-brand-accent-light"></i>
+          <span>Sepeti WhatsApp'a Gönder (<span id="sepet-sayac-2" class="text-brand-accent-light">0</span> Ürün)</span>
+        </button>
+      </div>
+
+      <!-- Filter & Search Bar -->
+      <div class="bg-white border border-brand-primary/10 rounded-3xl p-4 mb-10 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        <div class="flex flex-wrap gap-2" id="kategori-butonlari">
+          <button onclick="kategoriFiltrele('hepsi', this)" class="kat-btn active bg-brand-accent text-white border border-brand-accent px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Tüm Ürünler (24)
+          </button>
+          <button onclick="kategoriFiltrele('sifir_kapi', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Sıfır Kapı Sistemleri (4)
+          </button>
+          <button onclick="kategoriFiltrele('motor', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Kepenk &amp; Bahçe Motorları (6)
+          </button>
+          <button onclick="kategoriFiltrele('kumanda', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Kumanda, Alıcı &amp; Şalter (4)
+          </button>
+          <button onclick="kategoriFiltrele('fotosel', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Fotoselli Kapı &amp; Sensör (4)
+          </button>
+          <button onclick="kategoriFiltrele('ups', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            UPS Güç Kaynağı &amp; İkaz (2)
+          </button>
+          <button onclick="kategoriFiltrele('mekanik', this)" class="kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all">
+            Yay, Lamel, Dişli &amp; Bariyer (4)
+          </button>
+        </div>
+
+        <div class="relative min-w-[260px]">
+          <input id="urun-ara" type="text" oninput="urunleriCiz()" placeholder="Ürün adı veya kod ara (örn: 140 Nm, UPS, lamel)..." class="w-full bg-brand-bg border border-brand-primary/15 focus:border-brand-accent rounded-pill pl-10 pr-4 py-2.5 text-xs font-body text-brand-primary outline-none">
+          <i data-lucide="search" class="w-4 h-4 text-brand-text/40 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="urun-listesi" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY / MANIFESTO SECTION -->
+  <section class="philosophy-section py-28 px-4 md:px-6 bg-brand-primary text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+      <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1600&q=80" alt="Endüstriyel Çelik ve Otomasyon" class="w-full h-full object-cover">
+    </div>
+    <div class="max-w-5xl mx-auto relative z-10 text-center space-y-8">
+      <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-light block">
+        ÇOBAN GRUP OTOMASYON MANİFESTOSU
+      </span>
+      <p class="font-heading text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto">
+        Sektördeki çoğu yer geçici tamir ve kalitesiz yan sanayi parçalarla günü kurtarmaya odaklanır.
+      </p>
+      <h2 class="font-drama italic text-4xl sm:text-6xl md:text-7xl leading-tight text-white">
+        <span class="philosophy-word inline-block">Biz</span>
+        <span class="philosophy-word inline-block">yıllarca</span>
+        <span class="philosophy-word inline-block">sorunsuz</span>
+        <span class="philosophy-word inline-block">çalışan</span>
+        <span class="philosophy-word inline-block steel-gradient-text">zırhlı</span>
+        <span class="philosophy-word inline-block steel-gradient-text">otomasyona</span>
+        <span class="philosophy-word inline-block">odaklanıyoruz.</span>
+      </h2>
+      <div class="pt-4 flex flex-wrap justify-center gap-4">
+        <a href="tel:+905367495870" class="bg-brand-accent hover:bg-blue-500 text-white px-8 py-4 rounded-pill font-heading font-extrabold text-sm magnetic-btn shadow-lg shadow-brand-accent/30">
+          📞 Usta Hattı: 0536 749 58 70
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HİZMET BÖLGELERİ & SANCAKTEPE MERKEZ -->
+  <section id="bolgeler" class="py-24 px-4 md:px-6 bg-brand-bg">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-14">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand-accent font-bold block mb-2">
+          SAHA SERVİS AĞIMIZ &amp; 81 İLE KARGO
+        </span>
+        <h2 class="font-heading font-extrabold text-3xl md:text-5xl text-brand-primary tracking-tight">
+          Sancaktepe Merkezden <span class="font-drama italic font-normal text-brand-accent">Tüm İstanbul'a Servis.</span>
+        </h2>
+        <p class="text-brand-text/70 mt-2 max-w-2xl text-sm md:text-base">
+          Merkez adresimiz <strong>Merve Mahallesi Ege Sokak, Sancaktepe / İstanbul</strong> konumundadır. Mobil servis araçlarımızla İstanbul Anadolu ve Avrupa Yakası ile Kocaeli hattına arıza, bakım ve sıfır kapı montajına çıkıyoruz.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-7">
+        <!-- Card 1: Anadolu Yakası -->
+        <div class="bg-white border border-brand-primary/10 rounded-card p-7 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-brand-accent font-bold">MERKEZ BÖLGE</span>
+            <span class="bg-brand-accent text-white font-mono text-[11px] px-3 py-1 rounded-full font-semibold">Hızlı Müdahale</span>
+          </div>
+          <h3 class="font-heading font-bold text-2xl text-brand-primary mb-3">İstanbul Anadolu Yakası</h3>
+          <p class="text-sm text-brand-text/70 mb-5">Sancaktepe merkezimizden aynı gün arıza, bakım ve sıfır kepenk montajı sunduğumuz ilçeler:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-brand-accent/15 border border-brand-accent text-brand-accent font-bold text-xs px-3 py-1.5 rounded-full">📍 Sancaktepe (Merkez)</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Ümraniye</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Çekmeköy</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Ataşehir</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Sultanbeyli</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Pendik</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Kartal</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Maltepe</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Tuzla</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Kadıköy</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Üsküdar</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Beykoz</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Avrupa Yakası & Kocaeli Hattı -->
+        <div class="bg-white border border-brand-primary/10 rounded-card p-7 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-brand-accent font-bold">GENİŞ SERVİS AĞI</span>
+            <span class="bg-brand-primary/10 text-brand-primary font-mono text-[11px] px-3 py-1 rounded-full font-semibold">Montaj &amp; Servis</span>
+          </div>
+          <h3 class="font-heading font-bold text-2xl text-brand-primary mb-3">Avrupa Yakası &amp; Kocaeli</h3>
+          <p class="text-sm text-brand-text/70 mb-5">İstanbul Avrupa Yakası ticari bölgeleri ve Kocaeli sanayi hattı sıfır kapı ve servis noktalarımız:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">İkitelli OSB</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Başakşehir</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Şişli / Mecidiyeköy</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Beşiktaş</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Kağıthane</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Zeytinburnu</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Gebze</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Çayırova</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Darıca</span>
+            <span class="bg-brand-bg border border-brand-primary/10 text-xs px-3 py-1.5 rounded-full">Dilovası / GOSB</span>
+          </div>
+        </div>
+
+        <!-- Card 3: 81 İle Yedek Parça Kargo -->
+        <div class="bg-brand-primary text-white border border-white/15 rounded-card p-7 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-light font-bold">TÜRKİYE GENELİ</span>
+              <span class="bg-brand-accent text-white font-mono text-[11px] px-3 py-1 rounded-full font-bold">81 İle Kargo</span>
+            </div>
+            <h3 class="font-heading font-bold text-2xl text-white mb-3">81 İle Motor &amp; Yedek Parça Sevkiyatı</h3>
+            <p class="text-sm text-slate-300 mb-5 leading-relaxed">
+              Hangi şehirde olursanız olun; kepenk tüp motoru, santral motor, alıcı kart, kumanda, fotosel göz, UPS güç kaynağı ve ölçüye göre kesilmiş kepenk lamellerini anlaşmalı kargo ile adresinize gönderiyoruz.
+            </p>
+          </div>
+          <a href="#katalog" class="w-full bg-brand-accent hover:bg-blue-500 text-white font-heading font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider text-center block magnetic-btn">
+            📦 Yedek Parça Seç &amp; Fiyat İste
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & FOOTER -->
+  <footer id="iletisim" class="bg-brand-primary text-white rounded-t-[3.5rem] pt-20 pb-24 px-4 md:px-6 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <!-- Top CTA Card inside Footer -->
+      <div class="bg-brand-obsidian border border-white/15 rounded-card p-8 md:p-12 mb-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 steel-border-glow">
+        <div class="space-y-2 max-w-2xl">
+          <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-light">7/24 KEPENK SERVİSİ &amp; YEDEK PARÇA HATTI</span>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-4xl text-white">
+            Kepenginiz mi Arızalandı? Sıfır Kapı veya Yedek Parça mı Lazım?
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base">
+            Merve Mahallesi Ege Sokak Sancaktepe / İstanbul merkezimizden hemen destek alın.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="tel:+905367495870" onclick="donusumKaydet('footer_arama')" class="bg-brand-accent hover:bg-blue-500 text-white px-7 py-4 rounded-pill font-heading font-extrabold text-base flex items-center gap-2.5 magnetic-btn">
+            <i data-lucide="phone-call" class="w-5 h-5"></i>
+            0536 749 58 70
+          </a>
+          <a href="https://wa.me/905367495870?text=Merhaba%20%C3%87oban%20Kepenk%2C%20servis%20ve%20fiyat%20bilgisi%20almak%20istiyorum." target="_blank" rel="noopener" onclick="donusumKaydet('footer_whatsapp')" class="bg-[#10B981] hover:bg-[#059669] text-white px-7 py-4 rounded-pill font-heading font-extrabold text-base flex items-center gap-2.5 magnetic-btn">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            WhatsApp'tan Yazın
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-3.5">
+            <img src="logo.jpg" alt="Çoban Kepenk Logo" class="w-14 h-14 rounded-full border border-white/25 object-cover" onerror="this.style.display='none'">
+            <div>
+              <h3 class="font-heading font-extrabold text-xl text-white">ÇOBAN <span class="text-brand-accent-light">KEPENK</span></h3>
+              <p class="font-mono text-xs text-slate-300">ÇOBAN GRUP OTOMASYON &amp; KAPI TEKNOLOJİLERİ</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 max-w-md leading-relaxed">
+            Otomatik kepenk arıza tamiri, periyodik bakım, sıfır otomatik kapı satışı ve 81 ile yedek parça kargo merkezi. TS EN 13241 standartlarında güvenilir işçilik.
+          </p>
+          <div class="font-mono text-xs text-slate-400">
+            🌐 Resmi Web Adresi: <strong class="text-brand-accent-light">cobankepenk.com.tr</strong>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-brand-accent-light mb-4">Hızlı Erişim</h4>
+          <ul class="space-y-2.5 text-sm text-slate-300">
+            <li><a href="#sifir-kapi" class="hover:text-brand-accent-light transition-colors">Sıfır Otomatik Kapı Satışı</a></li>
+            <li><a href="#ariza-bakim" class="hover:text-brand-accent-light transition-colors">Kepenk Arıza &amp; Bakım Servisi</a></li>
+            <li><a href="#katalog" class="hover:text-brand-accent-light transition-colors">24 Ürünlük Yedek Parça Kataloğu</a></li>
+            <li><a href="#bolgeler" class="hover:text-brand-accent-light transition-colors">Sancaktepe &amp; İstanbul Servis Ağı</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-widest text-brand-accent-light mb-4">Merkez &amp; İletişim</h4>
+          <ul class="space-y-3 text-sm text-slate-200">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-accent-light flex-shrink-0 mt-1"></i>
+              <span>Merve Mahallesi Ege Sokak, Sancaktepe / İstanbul</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-brand-accent-light flex-shrink-0"></i>
+              <a href="tel:+905367495870" class="font-bold text-white hover:text-brand-accent-light">0536 749 58 70</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="truck" class="w-4 h-4 text-brand-accent-light flex-shrink-0"></i>
+              <span>81 İle Anlaşmalı Yedek Parça Kargo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs font-mono text-slate-400">
+        <div>
+          © 2026 <strong class="text-white">Çoban Kepenk — Çoban Grup Otomasyon &amp; Kapı Teknolojileri (cobankepenk.com.tr)</strong>. Tüm hakları saklıdır.
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="kalkan-durum" class="text-emerald-400">Çoban Güvenlik Kalkanı Aktif · Servis Hattı Açık</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP & CALL BAR -->
+  <div class="fixed bottom-5 right-5 z-50 flex items-center gap-3">
+    <a href="tel:+905367495870" onclick="donusumKaydet('sabit_arama')" class="bg-brand-primary hover:bg-brand-obsidian text-white border border-brand-accent-light/50 px-4 py-3 rounded-pill shadow-xl font-heading font-extrabold text-xs sm:text-sm flex items-center gap-2 magnetic-btn">
+      <i data-lucide="phone-call" class="w-4 h-4 text-brand-accent-light"></i>
+      <span>0536 749 58 70</span>
+    </a>
+
+    <a href="https://wa.me/905367495870?text=Merhaba%20%C3%87oban%20Kepenk%2C%20web%20sitenizden%20yaz%C4%B1yorum.%20Bilgi%20ve%20fiyat%20almak%20istiyorum."
+       target="_blank"
+       rel="noopener noreferrer"
+       id="whatsapp-float"
+       onclick="donusumKaydet('sabit_whatsapp')"
+       class="flex items-center gap-2.5 bg-[#10B981] text-white pl-4 pr-5 py-3 rounded-pill font-heading font-extrabold text-xs sm:text-sm hover:scale-105 transition-transform duration-300">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.317 0-4.46-.758-6.194-2.04l-.432-.328-2.637.884.884-2.637-.328-.432A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      <span>WhatsApp Destek</span>
+    </a>
+  </div>
+
+  <!-- WHATSAPP QUOTE CART DRAWER MODAL -->
+  <div id="sepet-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-[100] hidden justify-end">
+    <div class="w-full max-w-md bg-brand-primary text-white h-full p-6 flex flex-col justify-between overflow-y-auto border-l border-white/15 shadow-2xl">
+      <div>
+        <div class="flex items-center justify-between border-b border-white/15 pb-4">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-accent-light"></i>
+            <h3 class="font-heading font-bold text-lg">Fiyat Teklif Sepeti</h3>
+          </div>
+          <button onclick="sepetAcKapat(false)" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg text-xs font-mono">
+            ✕ Kapat
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+          Sitemizde sabit fiyat yer almaz. Seçtiğiniz sıfır kapı veya yedek parçaları WhatsApp'a gönderdiğinizde güncel fiyat ve 81 ile kargo bilgisi anında iletilir.
+        </p>
+
+        <div id="sepet-icerik" class="mt-4 divide-y divide-white/10"></div>
+      </div>
+
+      <div class="pt-6 border-t border-white/15 space-y-3">
+        <div>
+          <label class="block font-mono text-[11px] uppercase text-brand-accent-light mb-1">Adınız Soyadınız / Firma</label>
+          <input id="mus-ad" type="text" placeholder="Örn: Ahmet Yılmaz" class="w-full bg-brand-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-brand-accent-light">
+        </div>
+        <div>
+          <label class="block font-mono text-[11px] uppercase text-brand-accent-light mb-1">Telefon Numaranız</label>
+          <input id="mus-tel" type="tel" placeholder="05XX XXX XX XX" class="w-full bg-brand-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-brand-accent-light">
+        </div>
+        <div>
+          <label class="block font-mono text-[11px] uppercase text-brand-accent-light mb-1">Teslimat / Servis İl &amp; İlçe</label>
+          <input id="mus-adres" type="text" placeholder="Örn: Sancaktepe / İstanbul veya Ankara" class="w-full bg-brand-obsidian border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:border-brand-accent-light">
+        </div>
+
+        <button onclick="siparisiWhatsappGonder()" class="w-full bg-[#10B981] hover:bg-[#059669] text-white font-heading font-extrabold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg">
+          💬 Sepeti WhatsApp'a Gönder &amp; Fiyat İste
+        </button>
+        <a href="tel:+905367495870" class="w-full bg-brand-accent hover:bg-blue-500 text-white font-heading font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2">
+          📞 Telefonla Fiyat Sor: 0536 749 58 70
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN SCRIPT: CATALOG, SVG GENERATOR, GSAP ANIMATIONS & CONVERSION LOGIC -->
+  <script>
+    // Platinum Steel & Royal Blue Technical SVG Illustrations (Zero Yellow!)
+    function urunGorselSVG(tip, etiket) {
+      const gorunumler = {
+        sifir_kapi: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="28" y="14" width="184" height="102" rx="6" fill="#161F2C" stroke="#60A5FA" stroke-width="2"/>
+            <rect x="38" y="24" width="164" height="14" rx="2" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+            <rect x="38" y="41" width="164" height="14" rx="2" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+            <rect x="38" y="58" width="164" height="14" rx="2" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+            <rect x="38" y="75" width="164" height="14" rx="2" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+            <rect x="52" y="48" width="136" height="26" rx="5" fill="#0F141C" stroke="#60A5FA" stroke-width="1.5"/>
+            <text x="120" y="65" fill="#93C5FD" font-size="10" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+          </svg>`,
+        tup_motor: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#94a3b8"/><stop offset="50%" stop-color="#f1f5f9"/><stop offset="100%" stop-color="#475569"/>
+              </linearGradient>
+              <linearGradient id="cBlue" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#1D4ED8"/>
+              </linearGradient>
+            </defs>
+            <rect x="18" y="46" width="22" height="38" rx="4" fill="#161F2C" stroke="#60A5FA" stroke-width="1.5"/>
+            <rect x="40" y="38" width="34" height="54" rx="5" fill="url(#cBlue)"/>
+            <circle cx="57" cy="54" r="4" fill="#0F141C"/><circle cx="57" cy="76" r="4" fill="#0F141C"/>
+            <rect x="74" y="43" width="128" height="44" rx="4" fill="url(#cBody)" stroke="#64748b"/>
+            <polygon points="202,48 224,54 224,76 202,82" fill="#1E293B" stroke="#94A3B8"/>
+            <rect x="86" y="55" width="84" height="20" rx="4" fill="#0F141C" stroke="#60A5FA" stroke-width="1"/>
+            <text x="128" y="69" fill="#93C5FD" font-size="9.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+          </svg>`,
+        reduktorlu_motor: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="14" y="32" width="38" height="62" rx="6" fill="#2563EB" stroke="#93C5FD" stroke-width="1.5"/>
+            <circle cx="33" cy="98" r="7" fill="none" stroke="#93C5FD" stroke-width="3"/>
+            <line x1="33" y1="98" x2="33" y2="122" stroke="#e2e8f0" stroke-width="3"/>
+            <rect x="52" y="40" width="142" height="46" rx="4" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+            <rect x="66" y="53" width="102" height="20" rx="4" fill="#0F141C" stroke="#60A5FA"/>
+            <text x="117" y="67" fill="#93C5FD" font-size="9.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+            <polygon points="194,44 220,51 220,75 194,82" fill="#161F2C" stroke="#60A5FA"/>
+          </svg>`,
+        santral_motor: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="86" cy="65" r="42" fill="#161F2C" stroke="#94A3B8" stroke-width="2.5"/>
+            <circle cx="86" cy="65" r="28" fill="#1E293B" stroke="#60A5FA" stroke-width="2" stroke-dasharray="6,4"/>
+            <circle cx="86" cy="65" r="10" fill="#3B82F6"/>
+            <rect x="126" y="36" width="84" height="58" rx="8" fill="#334155" stroke="#94A3B8" stroke-width="2"/>
+            <rect x="134" y="66" width="68" height="18" rx="3" fill="#0F141C"/>
+            <text x="168" y="79" fill="#93C5FD" font-size="9" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+          </svg>`,
+        bahce_motor: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="48" y="22" width="104" height="84" rx="10" fill="#161F2C" stroke="#60A5FA" stroke-width="2"/>
+            <rect x="60" y="36" width="80" height="34" rx="5" fill="#0F141C" stroke="#3B82F6"/>
+            <text x="100" y="57" fill="#93C5FD" font-size="10" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+            <circle cx="178" cy="82" r="20" fill="#3B82F6" stroke="#fff" stroke-width="2" stroke-dasharray="5,3"/>
+            <circle cx="178" cy="82" r="7" fill="#0F141C"/>
+            <rect x="30" y="104" width="180" height="8" rx="3" fill="#64748b"/>
+          </svg>`,
+        kumanda: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="82" y="14" width="76" height="102" rx="18" fill="#161F2C" stroke="#94A3B8" stroke-width="2.5"/>
+            <circle cx="120" cy="26" r="3" fill="#38BDF8"/>
+            <circle cx="105" cy="46" r="10" fill="#0F141C" stroke="#60A5FA" stroke-width="2"/>
+            <circle cx="135" cy="46" r="10" fill="#0F141C" stroke="#60A5FA" stroke-width="2"/>
+            <circle cx="105" cy="72" r="10" fill="#0F141C" stroke="#94A3B8" stroke-width="2"/>
+            <circle cx="135" cy="72" r="10" fill="#0F141C" stroke="#94A3B8" stroke-width="2"/>
+            <text x="120" y="102" fill="#93C5FD" font-size="9" font-weight="bold" text-anchor="middle" font-family="JetBrains Mono, monospace">433.92 MHz</text>
+          </svg>`,
+        alici_kart: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="36" y="20" width="118" height="90" rx="8" fill="#161F2C" stroke="#60A5FA" stroke-width="2"/>
+            <rect x="48" y="32" width="38" height="24" rx="3" fill="#0F141C" stroke="#38BDF8"/>
+            <text x="67" y="48" fill="#38BDF8" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">CH</text>
+            <rect x="96" y="32" width="44" height="18" fill="#334155"/><rect x="96" y="54" width="44" height="18" fill="#334155"/>
+            <rect x="48" y="82" width="92" height="16" rx="3" fill="#2563EB"/>
+            <rect x="168" y="38" width="42" height="66" rx="10" fill="#161F2C" stroke="#94A3B8" stroke-width="2"/>
+            <circle cx="189" cy="56" r="6" fill="#60A5FA"/><circle cx="189" cy="74" r="6" fill="#94A3B8"/>
+          </svg>`,
+        ups: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="44" y="16" width="152" height="98" rx="8" fill="#161F2C" stroke="#60A5FA" stroke-width="2.5"/>
+            <rect x="60" y="30" width="64" height="24" rx="4" fill="#0F141C" stroke="#10b981"/>
+            <text x="92" y="46" fill="#10b981" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="monospace">220V UPS</text>
+            <circle cx="145" cy="38" r="4" fill="#10b981"/><circle cx="160" cy="38" r="4" fill="#38BDF8"/><circle cx="175" cy="38" r="4" fill="#ef4444"/>
+            <text x="120" y="80" fill="#FFFFFF" font-size="11.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+            <text x="120" y="98" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-family="Inter, sans-serif">Kesintisiz Kepenk Güç Kaynağı</text>
+          </svg>`,
+        fotosel: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="34" y="28" width="46" height="76" rx="22" fill="#161F2C" stroke="#60A5FA" stroke-width="2"/>
+            <circle cx="57" cy="54" r="12" fill="#0F141C" stroke="#38BDF8" stroke-width="2"/>
+            <rect x="160" y="28" width="46" height="76" rx="22" fill="#161F2C" stroke="#60A5FA" stroke-width="2"/>
+            <circle cx="183" cy="54" r="12" fill="#0F141C" stroke="#38BDF8" stroke-width="2"/>
+            <line x1="82" y1="54" x2="158" y2="54" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="6,4"/>
+            <text x="120" y="45" fill="#93C5FD" font-size="9.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">EMNİYET IŞINI</text>
+          </svg>`,
+        radar: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="44" y="22" width="152" height="52" rx="14" fill="#161F2C" stroke="#94A3B8" stroke-width="2"/>
+            <rect x="70" y="34" width="100" height="28" rx="8" fill="#0F141C" stroke="#38BDF8"/>
+            <path d="M 95 86 Q 120 102 145 86" fill="none" stroke="#38BDF8" stroke-width="2.5"/>
+            <path d="M 80 98 Q 120 120 160 98" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="5,4"/>
+            <text x="120" y="52" fill="#93C5FD" font-size="9.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">24.125 GHz RADAR</text>
+          </svg>`,
+        mekanik: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="28" y="34" width="184" height="20" rx="4" fill="#64748b" stroke="#cbd5e1"/>
+            <rect x="28" y="56" width="184" height="20" rx="4" fill="#475569" stroke="#94a3b8"/>
+            <rect x="28" y="78" width="184" height="20" rx="4" fill="#334155" stroke="#64748b"/>
+            <rect x="50" y="48" width="140" height="36" rx="6" fill="#0F141C" stroke="#60A5FA" stroke-width="2"/>
+            <text x="120" y="70" fill="#93C5FD" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+          </svg>`,
+        flasor: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 86 92 L 94 34 Q 120 22 146 34 L 154 92 Z" fill="#3B82F6" stroke="#93C5FD" stroke-width="2"/>
+            <rect x="76" y="92" width="88" height="16" rx="4" fill="#161F2C" stroke="#94A3B8"/>
+            <line x1="60" y1="45" x2="76" y2="52" stroke="#93C5FD" stroke-width="3"/>
+            <line x1="54" y1="66" x2="72" y2="66" stroke="#93C5FD" stroke-width="3"/>
+            <line x1="180" y1="45" x2="164" y2="52" stroke="#93C5FD" stroke-width="3"/>
+            <line x1="186" y1="66" x2="168" y2="66" stroke="#93C5FD" stroke-width="3"/>
+          </svg>`,
+        bariyer_kol: `
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="18" y="48" width="204" height="26" rx="4" fill="#f8fafc" stroke="#94A3B8" stroke-width="2"/>
+            <polygon points="40,48 65,48 55,74 30,74" fill="#dc2626"/>
+            <polygon points="90,48 115,48 105,74 80,74" fill="#dc2626"/>
+            <polygon points="140,48 165,48 155,74 130,74" fill="#dc2626"/>
+            <polygon points="190,48 212,48 202,74 180,74" fill="#dc2626"/>
+            <text x="120" y="102" fill="#93C5FD" font-size="10.5" font-weight="bold" text-anchor="middle" font-family="Inter, sans-serif">${etiket}</text>
+          </svg>`
+      };
+      return gorunumler[tip] || gorunumler.mekanik;
+    }
+
+    // 24 Ürünlük Tam Katalog (4 Sıfır Kapı + 20 Motor & Yedek Parça)
+    const URUNLER = [
+      // SIFIR KAPI SİSTEMLERİ (4)
+      {
+        id: "KAPI-KEPENK", kat: "sifir_kapi", gorsel: "sifir_kapi", etiket: "SIFIR OTOMATİK KEPENK",
+        ad: "Sıfır Çelik & Alüminyum Otomatik Kepenk Sistemi",
+        aciklama: "Mağaza, dükkan, depo ve garajlar için ölçüye özel üretilen motorlu, uzaktan kumandalı sıfır otomatik kepenk.",
+        kargo: "İstanbul Montaj / Sevkiyat",
+        teknik: [
+          ["Lamel Seçeneği", "Galvaniz Çelik / Poliüretan Alüminyum"],
+          ["Boya Standartı", "RAL Elektrostatik Toz Fırın Boya"],
+          ["Motor Sistemi", "Tüp Motor veya Santral Motor Dahil"],
+          ["Kontrol Donanımı", "Alıcı Kart + 2 Kumanda + Manuel Kol"],
+          ["Standart", "TS EN 13241 Uygunluk Belgeli"]
+        ]
+      },
+      {
+        id: "KAPI-FOTOSEL", kat: "sifir_kapi", gorsel: "radar", etiket: "SIFIR FOTOSELLİ KAPI",
+        ad: "Sıfır Fotoselli Otomatik Yana Kayar Cam Kapı",
+        aciklama: "Market, eczane, mağaza, ofis ve bina girişleri için yoğun kullanıma uygun radarlı sıfır otomatik cam kapı.",
+        kargo: "Anahtar Teslim Montaj",
+        teknik: [
+          ["Açılış Tipi", "Tek Kanat veya Çift Kanat Yana Kayar"],
+          ["Cam Yapısı", "8mm / 10mm Temperli veya Lamine Cam"],
+          ["Motor & İşlemci", "Fırçasız DC Dunker/Benzeri Sessiz Motor"],
+          ["Sensör & Güvenlik", "2 Mikrodalga Radar + Emniyet Fotoseli"],
+          ["Kontrol Paneli", "5 Fonksiyonlu Dijital Konum Anahtarı"]
+        ]
+      },
+      {
+        id: "KAPI-SEKSIYONEL", kat: "sifir_kapi", gorsel: "sifir_kapi", etiket: "SEKSİYONEL GARAJ/FABRİKA",
+        ad: "Sıfır Seksiyonel Garaj & Endüstriyel Sanayi Kapısı",
+        aciklama: "Villa otoparkları, site garajları ve fabrika yükleme alanları için ısı/ses yalıtımlı sandviç panelli kapı.",
+        kargo: "Ölçüye Özel Üretim",
+        teknik: [
+          ["Panel Kalınlığı", "40 mm Poliüretan Dolgulu Çelik Panel"],
+          ["Yüzey Deseni", "Ahşap Desen / Mikroprofil / Kasetli"],
+          ["Emniyet", "Halat ve Yay Kırılma Emniyet Sistemli"],
+          ["Otomasyon", "Tavan Tipi veya Şaft Tipi Endüstriyel Motor"],
+          ["Yalıtım", "4 Tarafı EPDM Kauçuk Sızdırmaz Fitilli"]
+        ]
+      },
+      {
+        id: "KAPI-BARIYER", kat: "sifir_kapi", gorsel: "bariyer_kol", etiket: "OTOPARK BARİYER SETİ",
+        ad: "Sıfır Otopark Kollu Bariyer Sistemi (3m / 4m / 6m)",
+        aciklama: "Site, apartman, iş merkezi ve fabrika girişleri için yoğun kullanıma uygun tam set otopark bariyeri.",
+        kargo: "81 İle Kargo & Montaj",
+        teknik: [
+          ["Kol Uzunluğu", "3 Metre / 4 Metre / 5 Metre / 6 Metre"],
+          ["Açılma Süresi", "2.5 – 5 Saniye Ayarlanabilir Hız"],
+          ["Set İçeriği", "Bariyer Gövdesi + Kol + Çatal + Fotosel + Flaşör"],
+          ["Kontrol", "Uzaktan Kumanda, HGS/OGS ve Plaka Tanıma Uyumu"],
+          ["Gövde", "IP54 Dış Ortam Dayanımlı Elektrostatik Gövde"]
+        ]
+      },
+
+      // MOTORLAR (6)
+      {
+        id: "MTR-60", kat: "motor", gorsel: "tup_motor", etiket: "60/80 Nm TÜP MOTOR",
+        ad: "Kepenk Tüp Motoru 60 Nm / 80 Nm",
+        aciklama: "Küçük boy kepenkler, büfe kepenkleri ve panjur sistemleri için sessiz çalışan boru tipi motor.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Tork Gücü", "60 Nm / 80 Nm"],
+          ["Kaldırma Kapasitesi", "90 kg – 120 kg"],
+          ["Çalışma Voltajı", "220V AC / 50 Hz"],
+          ["Boru Çapı Uyumu", "60 mm / 70 mm Sekizgen Boru"],
+          ["Koruma Sınıfı", "IP44 + Termik Koruma"]
+        ]
+      },
+      {
+        id: "MTR-100", kat: "motor", gorsel: "tup_motor", etiket: "100 Nm TÜP MOTOR",
+        ad: "Kepenk Tüp Motoru 100 Nm (Standart)",
+        aciklama: "Orta boy mağaza ve dükkân otomatik kepenkleri için yüksek dayanımlı standart tüp motor.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Tork Gücü", "100 Nm"],
+          ["Kaldırma Kapasitesi", "150 kg – 170 kg"],
+          ["Çalışma Voltajı", "220V AC / 50 Hz"],
+          ["Limit Switch", "Mekanik Çift Yönlü Ayarlı"],
+          ["Koruma Sınıfı", "IP44 Isı Termik Korumalı"]
+        ]
+      },
+      {
+        id: "MTR-140R", kat: "motor", gorsel: "reduktorlu_motor", etiket: "140 Nm REDÜKTÖRLÜ",
+        ad: "Kepenk Tüp Motoru 140 Nm (Redüktörlü)",
+        aciklama: "Geniş kepenkler için elektrik kesintisinde manuel çevirme koluyla açılabilen redüktörlü motor.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Tork Gücü", "140 Nm (Redüktörlü)"],
+          ["Kaldırma Kapasitesi", "200 kg – 220 kg"],
+          ["Manuel Açma", "Var (Krank Kolu Halkalı)"],
+          ["Çalışma Voltajı", "220V AC / 50 Hz"],
+          ["Boru Çapı Uyumu", "70 mm / 102 mm Boru"]
+        ]
+      },
+      {
+        id: "MTR-230R", kat: "motor", gorsel: "reduktorlu_motor", etiket: "230/300 Nm AĞIR TİP",
+        ad: "Kepenk Tüp Motoru 230 Nm / 300 Nm (Redüktörlü)",
+        aciklama: "Ağır çelik kepenkler, büyük depo ve sanayi kapıları için yüksek torklu redüktörlü tüp motor.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Tork Gücü", "230 Nm / 300 Nm Seçenekli"],
+          ["Kaldırma Kapasitesi", "300 kg – 420 kg"],
+          ["Manuel Açma", "Var (Redüktör Kolu İle)"],
+          ["Boru Çapı Uyumu", "102 mm Ağır Hizmet Borusu"],
+          ["Gövde", "Döküm Alüminyum + Çelik Dişli"]
+        ]
+      },
+      {
+        id: "MTR-SNT", kat: "motor", gorsel: "santral_motor", etiket: "SANTRAL MOTOR",
+        ad: "Santral Kepenk Motoru (Elektromanyetik Frenli)",
+        aciklama: "Yaylı dengeleme sistemiyle çalışan mağaza kepenkleri için merkezi santral kepenk motoru.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Kaldırma Kapasitesi", "180 kg / 240 kg / 360 kg"],
+          ["Fren Sistemi", "Elektromanyetik Boşa Alma Telli"],
+          ["Kasnak Çapı", "200 mm / 220 mm"],
+          ["Boru Çapı Uyumu", "60 mm / 76 mm Yuvarlak Boru"],
+          ["Çalışma Voltajı", "220V AC / Termik Korumalı"]
+        ]
+      },
+      {
+        id: "BHC-SET", kat: "motor", gorsel: "bahce_motor", etiket: "BAHÇE MOTOR SETİ",
+        ad: "Yana Kayar Bahçe Kapısı Motoru Tam Seti",
+        aciklama: "Site, fabrika ve müstakil otopark girişleri için kontrol kartı, fotosel, flaşör ve kumandalı tam set.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Kapı Ağırlık Kapasitesi", "600 kg / 1000 kg / 1500 kg"],
+          ["Set İçeriği", "Motor + Kart + 2 Kumanda + Fotosel + Flaşör"],
+          ["Yavaş Başla / Yavaş Dur", "Var (Elektronik Tork Ayarlı)"],
+          ["Manuel Boşa Alma", "Özel Anahtarlı Mekanizma"],
+          ["Koruma Sınıfı", "IP44 Dış Ortam Dayanımlı"]
+        ]
+      },
+
+      // KUMANDA & ALICI (4)
+      {
+        id: "KMD-4K", kat: "kumanda", gorsel: "kumanda", etiket: "4 KANALLI KUMANDA",
+        ad: "Otomatik Kepenk & Bariyer Kumandası (4 Kanallı)",
+        aciklama: "Metal çerçeveli, sürgülü kapaklı, kepenk, garaj kapısı ve bariyer sistemleriyle uyumlu kumanda.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Çalışma Frekansı", "433.92 MHz"],
+          ["Kanal (Tuş) Sayısı", "4 Bağımsız Kanal"],
+          ["Kodlama Tipi", "Kopyalanabilir / Rolling Code Seçenekli"],
+          ["Çekim Mesafesi", "Açık Alanda 50 – 100 Metre"],
+          ["Gövde", "Paslanmaz Metal Çerçeve + Kızaklı Kapak"]
+        ]
+      },
+      {
+        id: "KRT-SET", kat: "kumanda", gorsel: "alici_kart", etiket: "ALICI KART + 2 KMD",
+        ad: "Kepenk Alıcı Kontrol Kartı + 2 Kumanda Seti",
+        aciklama: "Anahtarlı veya şalterli kepenkleri uzaktan kumandalı sisteme çeviren muhafaza kutulu tam set.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Besleme Voltajı", "220V AC"],
+          ["Frekans & Hafıza", "433.92 MHz / 80–250 Kumanda Hafızası"],
+          ["Kutu İçeriği", "1 Alıcı Kart + 2 Kumanda"],
+          ["Giriş Uçları", "Fotosel, Manuel Buton, Harici Anten"],
+          ["Çalışma Modu", "Otomatik Kapanma / Bas-Bırak Ayarlı"]
+        ]
+      },
+      {
+        id: "KRT-HRC", kat: "kumanda", gorsel: "alici_kart", etiket: "HARİCİ ALICI 12/24V",
+        ad: "Harici Kumanda Alıcı Kartı (2 Kanallı Üniversal)",
+        aciklama: "Farklı marka bariyer, bahçe kapısı ve fotoselli kapı kartlarına yeni kumanda tanıtmak için üniversal alıcı.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Çalışma Voltajı", "12V – 24V AC/DC"],
+          ["Çıkış Rölesi", "2 Kanallı (NO / NC Kontak)"],
+          ["Frekans", "433.92 MHz"],
+          ["Kapasite", "200+ Kumanda Tanımlama"],
+          ["Uyumluluk", "Tüm Marka Bariyer ve Kapı Kartları"]
+        ]
+      },
+      {
+        id: "KPK-SLT", kat: "kumanda", gorsel: "mekanik", etiket: "ANAHTARLI ŞALTER",
+        ad: "Anahtarlı Kepenk Şalteri (Aç-Kapa Kilitli Buton)",
+        aciklama: "Kepengi dışarıdan veya içeriden anahtarla güvenle açıp kapatmayı sağlayan kilitli yüzey şalteri.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Kullanım Tipi", "Sıva Üstü / Sıva Altı Seçenekli"],
+          ["Kontak Yapısı", "Çift Yönlü (Yukarı / Aşağı Yaylı)"],
+          ["Kilit Mekanizması", "Pirinç Barel + 2 Adet Anahtar"],
+          ["Gövde", "Darbeye Dayanıklı Metal / ABS Kasa"],
+          ["Akım Kapasitesi", "10A / 250V AC"]
+        ]
+      },
+
+      // UPS & İKAZ (2)
+      {
+        id: "UPS-GUC", kat: "ups", gorsel: "ups", etiket: "KEPENK UPS AKÜLÜ",
+        ad: "Kepenk Güç Kaynağı (UPS) — Kesintisiz Güç",
+        aciklama: "Elektrik kesildiğinde otomatik kepengin kumandayla açılıp kapanmasını sağlayan akülü güç kaynağı.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Güç Seçenekleri", "800 VA / 1000 VA / 1500 VA"],
+          ["İç Akü Sistemi", "2 x 12V 7Ah / 9Ah Kuru Tip Akü"],
+          ["Bekleme Süresi", "Elektrik Kesintisinde 36–72 Saat"],
+          ["Koruma", "Aşırı Yük, Kısa Devre ve Akü Deşarj Koruması"],
+          ["Uyumluluk", "Tüm Tüp ve Santral Kepenk Motorları"]
+        ]
+      },
+      {
+        id: "IKZ-FLS", kat: "ups", gorsel: "flasor", etiket: "LED FLAŞÖR LAMBA",
+        ad: "İkaz Lambası (Tepe Flaşör Lamba - Antenli)",
+        aciklama: "Kepenk, garaj kapısı veya bariyer çalışırken görsel uyarı veren dahili antenli LED tepe lambası.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Besleme Voltajı", "12V / 24V / 220V Multivoltaj"],
+          ["Aydınlatma", "Yüksek Parlaklıklı SMD LED"],
+          ["Ek Özellik", "Dahili 433.92 MHz Mesafe Artırıcı Anten"],
+          ["Koruma Sınıfı", "IP54 Yağmur ve Toz Korumalı"],
+          ["Montaj", "Duvar ve Üst Yüzey Bağlantı Ayaklı"]
+        ]
+      },
+
+      // FOTOSEL & SENSÖR (4)
+      {
+        id: "FTS-GOZ", kat: "fotosel", gorsel: "fotosel", etiket: "EMNİYET FOTOSELİ",
+        ad: "Emniyet Fotoseli (Fotosel Göz Takımı - Alıcı/Verici)",
+        aciklama: "Kepenk, garaj kapısı veya bariyer kapanırken altından araç/insan geçtiğinde sistemi durduran sensör.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Çalışma Mesafesi", "15 – 20 Metre"],
+          ["Besleme Voltajı", "12V – 24V AC/DC"],
+          ["Çıkış Kontağı", "COM / NO / NC Röle Çıkışlı"],
+          ["Koruma Sınıfı", "IP55 Dış Ortam Mercekli Gövde"],
+          ["Set İçeriği", "1 Adet Verici (TX) + 1 Adet Alıcı (RX)"]
+        ]
+      },
+      {
+        id: "FTS-RDR", kat: "fotosel", gorsel: "radar", etiket: "MİKRODALGA RADAR",
+        ad: "Fotoselli Kapı Mikrodalga Radar Sensörü",
+        aciklama: "Market, mağaza ve bina girişlerindeki otomatik yana kayar cam kapılar için hassas hareket sensörü.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Algılama Teknolojisi", "24.125 GHz Mikrodalga Doppler"],
+          ["Montaj Yüksekliği", "Maksimum 3.5 – 4.0 Metre"],
+          ["Besleme Voltajı", "12V – 24V AC/DC"],
+          ["Hassasiyet Ayarı", "Açı ve Mesafe Potansiyometreli"],
+          ["Uyumluluk", "Tüm Marka Fotoselli Kapı Mekanizmaları"]
+        ]
+      },
+      {
+        id: "FTS-TKR", kat: "fotosel", gorsel: "mekanik", etiket: "ASKI TEKER & KAYIŞ",
+        ad: "Fotoselli Kapı Tekerlek (Askı Aparatı) & Kayış Seti",
+        aciklama: "Ses yapan veya sıkışan otomatik cam kapılar için çift tekerlekli taşıyıcı araba ve çelik telli triger kayış.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Tekerlek Yapısı", "Çift Rulmanlı Aşınmaz Delrin Teker"],
+          ["Kayış Tipi", "S8M / RPP8 Çelik Telli Dişli Kayış"],
+          ["Yükseklik Ayarı", "Cıvatalı Milimetrik Terazi Ayarı"],
+          ["Kapı Ağırlık Uyumu", "Kanat Başı 120 kg – 150 kg"],
+          ["Kullanım", "Yana Kayar Otomatik Cam Kapılar"]
+        ]
+      },
+      {
+        id: "FTS-PRG", kat: "fotosel", gorsel: "alici_kart", etiket: "KONUM ANAHTARI",
+        ad: "Fotoselli Kapı Dijital Konum Anahtarı (Program Seçici)",
+        aciklama: "Fotoselli kapıyı kış modu (yarım açılma), tek yön (sadece çıkış), sürekli açık veya gece kilitli moduna alır.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Fonksiyon Sayısı", "5 / 6 Çalışma Modu (Otomatik, Kış, Gece, Açık, Tek Yön)"],
+          ["Güvenlik", "Şifreli veya Anahtarlı Tuş Kilidi"],
+          ["Ekran", "Işıklı Durum ve Arıza Kodu Göstergesi"],
+          ["Montaj", "Sıva Üstü İnce Tasarım"],
+          ["Bağlantı", "Klemensli / Soketli Kolay Bağlantı"]
+        ]
+      },
+
+      // MEKANİK, YAY, LAMEL, BARİYER (4)
+      {
+        id: "BHC-KRM", kat: "mekanik", gorsel: "mekanik", etiket: "KREMAYER DİŞLİ 1M",
+        ad: "Kremayer Dişli (Çelik / Polyamid - 1 Metre Modül 4)",
+        aciklama: "Yana kayar bahçe ve fabrika kapısı motorları için bağlantı kulakçıklı ve cıvatalı kremayer dişli.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Boyut & Modül", "100 cm (1 Metre) / Modül 4 (M4)"],
+          ["Malzeme Seçeneği", "Galvaniz Çelik (30x8mm) veya Çelik Çekirdekli Polyamid"],
+          ["Montaj Elemanları", "Kaynak Burcu + Cıvata + Pul Dahil"],
+          ["Kapasite", "Polyamid: 800 kg'a kadar / Çelik: 2500 kg'a kadar"],
+          ["Uyumluluk", "Tüm Yana Kayar Bahçe Kapısı Motorları"]
+        ]
+      },
+      {
+        id: "KPK-YAY", kat: "mekanik", gorsel: "santral_motor", etiket: "YAY ÇELİĞİ & TAS",
+        ad: "Kepenk Yay Çeliği & Kutu Yay Tası",
+        aciklama: "Santral motorlu ve manuel kepenkler için yüksek tansiyonlu temperlenmiş kepenk yay çeliği ve yay tası.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Malzeme", "Yüksek Karbonlu Temperli Yay Çeliği"],
+          ["Genişlik Seçenekleri", "50 mm / 60 mm / 70 mm Şerit Yay"],
+          ["Yay Tası Çapı", "200 mm / 220 mm Rulmanlı veya Burçlu"],
+          ["Boru Uyumu", "60 mm ve 76 mm Kepenk Borusu"],
+          ["Kullanım", "Kepenk Dengeleme ve Yay Kırılması Tamiri"]
+        ]
+      },
+      {
+        id: "KPK-LML", kat: "mekanik", gorsel: "mekanik", etiket: "KEPENK LAMELİ",
+        ad: "Çelik & Alüminyum Poliüretanlı Kepenk Lameli",
+        aciklama: "Hasar gören kepenklerin tamiri veya yeni imalat için istediğiniz ölçüde kesilmiş kepenk lameli ve yan dikme.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Lamel Tipleri", "77 mm / 95 mm Poliüretan Dolgulu veya Galvaniz Çelik"],
+          ["Et Kalınlığı", "0.80 mm – 1.20 mm Galvaniz Çelik Seçenekli"],
+          ["Boya", "Elektrostatik Toz Boya (RAL Renk Seçenekli)"],
+          ["Aksesuar", "Yan Tapa, Yan Dikme Rayı (Fitilli) ve Alt Baza"],
+          ["Gönderim", "Ölçünüze Göre Kesilmiş Kargo Gönderimi"]
+        ]
+      },
+      {
+        id: "BRY-KOL", kat: "mekanik", gorsel: "bariyer_kol", etiket: "BARİYER KOLU 3-6M",
+        ad: "Otopark Kollu Bariyer Yedek Kolu (3m / 4m / 6m) & Çatal Ayak",
+        aciklama: "Araç çarpması sonucu kırılan otopark bariyerleri için reflektör bantlı ve alt fitilli alüminyum yedek kol.",
+        kargo: "81 İle Kargo",
+        teknik: [
+          ["Boy Seçenekleri", "3 Metre / 4 Metre / 5 Metre / 6 Metre"],
+          ["Profil Yapısı", "Alüminyum Elips / Dikdörtgen Rüzgâr Dirençli Profil"],
+          ["Üzerindeki Donanım", "Kırmızı Reflektör Şerit + Alt Darbe Emici Kauçuk Fitil"],
+          ["Ek Parça", "Sabit veya Hareketli Çatal Ayak Seçeneği"],
+          ["Uyumluluk", "Tüm Yerli ve İthal Kollu Bariyer Gövdeleri"]
+        ]
+      }
+    ];
+
+    let sepet = {};
+    let aktifKategori = "hepsi";
+
+    function urunleriCiz() {
+      const kutu = document.getElementById("urun-listesi");
+      const aranan = (document.getElementById("urun-ara").value || "").toLowerCase().trim();
+      const liste = URUNLER.filter(u => {
+        const katUygun = aktifKategori === "hepsi" || u.kat === aktifKategori;
+        const metin = `${u.id} ${u.ad} ${u.aciklama} ${u.teknik.map(t => t.join(" ")).join(" ")}`.toLowerCase();
+        const araUygun = !aranan || metin.includes(aranan);
+        return katUygun && araUygun;
+      });
+
+      kutu.innerHTML = liste.map(u => `
+        <div class="bg-white border border-brand-primary/10 hover:border-brand-accent rounded-3xl p-5 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div>
+            <div class="h-44 rounded-2xl bg-brand-primary border border-white/10 flex items-center justify-center mb-4 relative overflow-hidden p-3">
+              <span class="absolute top-2.5 left-2.5 bg-brand-obsidian/90 border border-white/20 text-brand-accent-light font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-md">
+                ${u.id}
+              </span>
+              <span class="absolute top-2.5 right-2.5 bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-mono text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                ${u.kargo}
+              </span>
+              <div class="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                ${urunGorselSVG(u.gorsel, u.etiket)}
+              </div>
+            </div>
+
+            <div class="font-mono text-[10px] uppercase tracking-widest text-brand-accent font-bold">
+              ${u.kat === 'sifir_kapi' ? 'SIFIR KAPI SİSTEMİ' : u.kat.toUpperCase()}
+            </div>
+            <h3 class="font-heading font-bold text-base text-brand-primary mt-1 mb-1.5 leading-snug">
+              ${u.ad}
+            </h3>
+            <p class="text-xs text-brand-text/70 mb-3 leading-relaxed">
+              ${u.aciklama}
+            </p>
+
+            <div class="bg-brand-bg border border-brand-primary/10 rounded-2xl p-3 mb-4">
+              <div class="font-mono text-[10px] uppercase tracking-wider text-brand-primary font-bold mb-1.5 flex items-center gap-1">
+                <span>⚙️ Teknik Özellikler</span>
+              </div>
+              <table class="w-full text-[11px]">
+                ${u.teknik.map(s => `
+                  <tr class="border-b border-dashed border-brand-primary/10 last:border-none">
+                    <td class="py-1 text-brand-text/65 pr-2">${s[0]}</td>
+                    <td class="py-1 text-brand-primary font-semibold text-right">${s[1]}</td>
+                  </tr>
+                `).join("")}
+              </table>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 pt-3 border-t border-brand-primary/10">
+            <span class="font-mono text-[11px] font-bold text-brand-primary">
+              💬 Fiyat: WhatsApp'ta
+            </span>
+            <button onclick="sepeteEkle('${u.id}')" class="bg-brand-accent hover:bg-blue-500 text-white px-4 py-2.5 rounded-pill font-heading font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm">
+              <span>+ Sepete Ekle</span>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function kategoriFiltrele(kat, btn) {
+      aktifKategori = kat;
+      document.querySelectorAll(".kat-btn").forEach(b => {
+        b.className = "kat-btn bg-brand-bg text-brand-text hover:bg-brand-primary/5 border border-brand-primary/10 px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all";
+      });
+      btn.className = "kat-btn active bg-brand-accent text-white border border-brand-accent px-4 py-2 rounded-pill font-heading font-semibold text-xs transition-all";
+      urunleriCiz();
+    }
+
+    function sepeteEkle(id) {
+      sepet[id] = (sepet[id] || 0) + 1;
+      sepetGuncelle();
+      sepetAcKapat(true);
+    }
+
+    function adetDegistir(id, fark) {
+      sepet[id] = (sepet[id] || 0) + fark;
+      if (sepet[id] <= 0) delete sepet[id];
+      sepetGuncelle();
+    }
+
+    function sepetGuncelle() {
+      const toplamAdet = Object.values(sepet).reduce((a, b) => a + b, 0);
+      document.getElementById("sepet-sayac").textContent = toplamAdet;
+      document.getElementById("sepet-sayac-2").textContent = toplamAdet;
+
+      const icerik = document.getElementById("sepet-icerik");
+      if (toplamAdet === 0) {
+        icerik.innerHTML = `<p class="text-white/50 text-xs py-8 text-center font-mono">Sepetinizde henüz ürün yok. Katalogdan sıfır kapı veya yedek parça ekleyebilirsiniz.</p>`;
+        return;
+      }
+      icerik.innerHTML = Object.entries(sepet).map(([id, adet]) => {
+        const u = URUNLER.find(x => x.id === id);
+        return `
+          <div class="py-3 flex items-center justify-between gap-3">
+            <div>
+              <div class="font-heading font-semibold text-xs text-white">${u.ad}</div>
+              <div class="font-mono text-[10px] text-brand-accent-light">Kod: ${u.id}</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="adetDegistir('${id}', -1)" class="w-7 h-7 rounded-lg bg-brand-obsidian border border-white/20 text-white font-bold text-xs">-</button>
+              <span class="font-mono font-bold text-xs w-5 text-center">${adet}</span>
+              <button onclick="adetDegistir('${id}', 1)" class="w-7 h-7 rounded-lg bg-brand-obsidian border border-white/20 text-white font-bold text-xs">+</button>
+            </div>
+          </div>`;
+      }).join("");
+    }
+
+    function sepetAcKapat(ac) {
+      const modal = document.getElementById("sepet-modal");
+      if (ac) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      } else {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    function siparisiWhatsappGonder() {
+      const satirlar = Object.entries(sepet).map(([id, adet]) => {
+        const u = URUNLER.find(x => x.id === id);
+        return `• ${u.ad} (${u.id}) x ${adet} adet`;
+      });
+      if (satirlar.length === 0) {
+        alert("Lütfen önce teklif sepetine ürün ekleyin.");
+        return;
+      }
+      const ad = document.getElementById("mus-ad").value.trim() || "Belirtilmedi";
+      const tel = document.getElementById("mus-tel").value.trim() || "Belirtilmedi";
+      const adres = document.getElementById("mus-adres").value.trim() || "Belirtilmedi";
+
+      const mesaj = [
+        "Merhaba Çoban Kepenk (cobankepenk.com.tr), sitenizden seçtiğim şu ürünler için GÜNCEL FİYAT ve bilgi almak istiyorum:",
+        "",
+        ...satirlar,
+        "",
+        `👤 Müşteri: ${ad}`,
+        `📞 Telefon: ${tel}`,
+        `📍 İl / İlçe: ${adres}`
+      ].join("\n");
+
+      donusumKaydet("sepet_whatsapp_siparis");
+      window.open("https://wa.me/905367495870?text=" + encodeURIComponent(mesaj), "_blank");
+    }
+
+    function hizliTalepGonder() {
+      const hizmet = document.getElementById("hizli-hizmet").value;
+      const ad = document.getElementById("hizli-ad").value.trim() || "Belirtilmedi";
+      const ilce = document.getElementById("hizli-ilce").value.trim() || "Belirtilmedi";
+      const not = document.getElementById("hizli-not").value.trim() || "Belirtilmedi";
+
+      const mesaj = [
+        "Merhaba Çoban Kepenk (cobankepenk.com.tr), Hızlı Talep Formu üzerinden ulaşıyorum:",
+        "",
+        `🛠️ Hizmet: ${hizmet}`,
+        `👤 Ad / Firma: ${ad}`,
+        `📍 Konum: ${ilce}`,
+        `📝 Detay / Ölçü: ${not}`
+      ].join("\n");
+
+      donusumKaydet("hizli_talep_whatsapp");
+      window.open("https://wa.me/905367495870?text=" + encodeURIComponent(mesaj), "_blank");
+    }
+
+    function sifirKapiTeklifAl() {
+      const tur = document.getElementById("kapi-turu").value;
+      const en = document.getElementById("kapi-en").value.trim() || "Belirtilmedi";
+      const boy = document.getElementById("kapi-boy").value.trim() || "Belirtilmedi";
+
+      const mesaj = [
+        "Merhaba Çoban Kepenk (cobankepenk.com.tr), sıfır kapı/kepenk için fiyat teklifi almak istiyorum:",
+        "",
+        `🚪 Sistem: ${tur}`,
+        `📏 Genişlik (En): ${en} cm`,
+        `📐 Yükseklik (Boy): ${boy} cm`
+      ].join("\n");
+
+      donusumKaydet("sifir_kapi_olcu_teklif");
+      window.open("https://wa.me/905367495870?text=" + encodeURIComponent(mesaj), "_blank");
+    }
+
+    function donusumKaydet(tur) {
+      try {
+        localStorage.setItem("coban_kepenk_son_donusum", JSON.stringify({ tur, zaman: new Date().toISOString() }));
+      } catch (e) {}
+    }
+
+    // Initialize Icons, Catalog, and GSAP Animations
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      urunleriCiz();
+      sepetGuncelle();
+
+      // Navbar morph on scroll
+      const navbar = document.getElementById('navbar');
+      const heroSection = document.getElementById('hero');
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            navbar.classList.remove('navbar-scrolled');
+            navbar.classList.add('navbar-transparent');
+          } else {
+            navbar.classList.remove('navbar-transparent');
+            navbar.classList.add('navbar-scrolled');
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(heroSection);
+
+      // GSAP Context
+      gsap.registerPlugin(ScrollTrigger);
+      const ctx = gsap.context(() => {
+        // Hero Entrance
+        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        heroTl
+          .from('.hero-badge', { y: 20, opacity: 0, duration: 0.6 })
+          .from('.hero-line-1', { y: 40, opacity: 0, duration: 0.8 }, '-=0.3')
+          .from('.hero-line-2', { y: 60, opacity: 0, duration: 1 }, '-=0.5')
+          .from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.6 }, '-=0.5')
+          .from('.hero-cta', { y: 20, opacity: 0, stagger: 0.1, duration: 0.5 }, '-=0.3')
+          .from('.hero-stats > *', { y: 20, opacity: 0, stagger: 0.1, duration: 0.4 }, '-=0.2');
+
+        // Feature Cards Entrance
+        gsap.from('.feature-card', {
+          y: 60,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#ariza-bakim',
+            start: 'top 80%',
+          }
+        });
+
+        // Philosophy Word Reveal
+        const philosophyWords = document.querySelectorAll('.philosophy-word');
+        gsap.from(philosophyWords, {
+          y: 40,
+          opacity: 0,
+          stagger: 0.06,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.philosophy-section',
+            start: 'top 75%',
+          }
+        });
+
+        // Animated Counters
+        document.querySelectorAll('[data-count]').forEach(el => {
+          const target = parseInt(el.dataset.count);
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 90%',
+            onEnter: () => {
+              gsap.to(el, {
+                textContent: target,
+                duration: 1.5,
+                ease: 'power2.out',
+                snap: { textContent: 1 },
+                onUpdate: function() {
+                  el.textContent = Math.round(parseFloat(el.textContent));
+                }
+              });
+            },
+            once: true
+          });
+        });
+
+        // Diagnostic Shuffler Logic
+        const items = gsap.utils.toArray('.shuffler-item');
+        if (items.length > 0) {
+          setInterval(() => {
+            const parent = items[0].parentNode;
+            const currentItems = Array.from(parent.querySelectorAll('.shuffler-item'));
+            parent.appendChild(currentItems[0]);
+            const updated = Array.from(parent.querySelectorAll('.shuffler-item'));
+            updated.forEach((el, index) => {
+              if (index === 0) {
+                el.className = 'shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-30 translate-y-0 scale-100 opacity-100 transition-all duration-500';
+              } else if (index === 1) {
+                el.className = 'shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-20 translate-y-3 scale-[0.95] opacity-60 transition-all duration-500';
+              } else {
+                el.className = 'shuffler-item absolute inset-0 bg-brand-bg border border-brand-primary/15 rounded-2xl p-4 shadow-sm z-10 translate-y-6 scale-[0.9] opacity-30 transition-all duration-500';
+              }
+            });
+          }, 3000);
+        }
+
+        // Status Grid Animation
+        const cells = document.querySelectorAll('.grid-cell.highlight');
+        if (cells.length > 0) {
+          gsap.to(cells, {
+            backgroundColor: '#2563EB',
+            opacity: 0.85,
+            duration: 1,
+            stagger: {
+              each: 0.18,
+              yoyo: true,
+              repeat: -1
+            },
+            ease: 'power1.inOut'
+          });
+        }
+      });
+
+      // Telemetry Typewriter Logic
+      const phrases = [
+        "Sancaktepe merkez ekip: Otomatik kepenk arıza müdahalesine çıkış yaptı...",
+        "Kargo Sevkiyat: 140 Nm Redüktörlü Tüp Motor + Alıcı Kart (Ankara'ya kargolandı)...",
+        "Sıfır İmalat: 420x350 cm Poliüretanlı Kepenk montajı tamamlandı (Ümraniye)...",
+        "81 İle Kargo: Kepenk UPS Güç Kaynağı & 4 Kanallı Kumanda stoktan teslime hazır..."
+      ];
+      const twEl = document.getElementById('typewriter-text');
+      if (twEl) {
+        let curPhraseIndex = 0;
+        const writeLoop = async () => {
+          while (true) {
+            let curWord = phrases[curPhraseIndex];
+            for (let i = 0; i < curWord.length; i++) {
+              twEl.innerText = curWord.substring(0, i + 1);
+              await new Promise((r) => setTimeout(r, 45));
+            }
+            await new Promise((r) => setTimeout(r, 2200));
+            for (let i = curWord.length; i > 0; i--) {
+              twEl.innerText = curWord.substring(0, i - 1);
+              await new Promise((r) => setTimeout(r, 20));
+            }
+            await new Promise((r) => setTimeout(r, 400));
+            curPhraseIndex = (curPhraseIndex + 1) % phrases.length;
+          }
+        };
+        writeLoop();
+      }
+    });
+  </script>
+</body>
+</html>
